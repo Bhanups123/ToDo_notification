@@ -5,6 +5,8 @@ const passport = require("passport");
 const User = require("../models/User");
 const Keys = require("../config/keys");
 const router = express.Router();
+const mongoose = require("mongoose");
+const Data = mongoose.model("Data");
 
 router.post("/todo/register", (req, res) => {
   const { name, email, password } = req.body;
@@ -22,10 +24,15 @@ router.post("/todo/register", (req, res) => {
         password
       });
 
+      const newData = Data({
+        todos: []
+      });
+
       bcrypt.genSalt((err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
+          newUser.todos = newData._id;
 
           newUser
             .save()
