@@ -12,8 +12,8 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
-    select: false //for not responding in find()
+    required: true
+    // select: false //for not responding in find()
   },
   date: {
     type: Date,

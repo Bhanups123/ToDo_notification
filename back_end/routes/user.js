@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.post("/todo/register", (req, res) => {
   const { name, email, password } = req.body;
+  console.log(email);
+
   User.findOne({ email }).then(user => {
     if (user) {
       const errors = {};
@@ -19,6 +21,7 @@ router.post("/todo/register", (req, res) => {
         email,
         password
       });
+
       bcrypt.genSalt((err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
@@ -42,24 +45,32 @@ router.post("/todo/login", (req, res) => {
       errors.email = "User not found";
       return res.status(404).json(errors);
     }
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (!isMatch) {
-        const errors = {};
-        errors.password = "Invalid Password!!";
-        return res.status(401).json(errors);
-      }
-      const payload = {
-        email: user.email,
-        name: user.name
-      };
-      jwt.sign(payload, Keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.json({ msg: "Congratulation!!!", token: "Bearer " + token });
+    bcrypt
+      .compare(password, user.password)
+      .then(isMatch => {
+        if (!isMatch) {
+          const errors = {};
+          errors.password = "Invalid Password!!";
+          return res.status(401).json(errors);
         }
-      });
-    });
+        const payload = {
+          email: user.email,
+          name: user.name
+        };
+        jwt.sign(
+          payload,
+          Keys.secretOrKey,
+          { expiresIn: 3600 },
+          (err, token) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.json({ msg: "Congratulation!!!", token: "Bearer " + token });
+            }
+          }
+        );
+      })
+      .catch(err => console.log(err));
   });
 });
 

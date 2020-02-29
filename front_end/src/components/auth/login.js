@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import authHeader from "../../utils/authheader";
 
 class Login extends Component {
   state = {
@@ -13,7 +15,15 @@ class Login extends Component {
       password: this.state.password
     };
 
-    console.log(user);
+    axios
+      .post("/todo/login", user)
+      .then(res => {
+        const { token } = res.data;
+        localStorage.setItem("jwtToken", token);
+        authHeader(token);
+        this.props.history.push("/todo");
+      })
+      .catch();
   };
 
   handleOnChange = e => {

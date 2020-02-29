@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Register extends Component {
   state = {
@@ -17,8 +18,9 @@ class Register extends Component {
       password_confirm: this.state.password_confirm
     };
 
-    console.log(user);
-    this.props.history.push("/login");
+    axios.post("/todo/register", user).then(res => {
+      this.props.history.push("/login");
+    });
   };
 
   handleOnChange = e => {
