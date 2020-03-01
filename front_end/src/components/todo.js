@@ -1,11 +1,33 @@
 import React, { Component } from "react";
 import AddTodo from "./addtodo";
 import GetTodo from "./gettodo";
+import axios from "axios";
+import authHeader from "../utils/authheader";
 
 class ToDo extends Component {
   state = {
     todos: []
   };
+  componentDidMount() {
+    const token = localStorage.getItem("jwtToken");
+    authHeader(token);
+
+    axios
+      .get("/todo/mytodos")
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          todos: res.data.todos
+        });
+      })
+      .catch();
+  }
+  componentWillUnmount() {
+    axios
+      .post("/todo/mytodos", { todos: this.state.todos })
+      .then()
+      .catch();
+  }
   handleAddTodo = todo => {
     if (!todo) {
       return "add a valid todo";

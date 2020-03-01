@@ -14,26 +14,25 @@ const GetTodo = props => (
 
     <div className="todolist">
       {props.todos.map((todo, index) => (
-        <div className="block">
-          <p>
-            <div>
-              {index + 1}. {todo}
-              <button
-                className="btn btn-info sidebtn"
-                onClick={e => props.handleDeleteTodo(todo)}
-              >
-                {" "}
-                ♦{" "}
-              </button>
-              <button
-                className="btn btn-info sidebtn"
-                onClick={e => props.handleDeleteTodo(todo)}
-              >
-                {" "}
-                -{" "}
-              </button>
-            </div>
-          </p>
+        <div key={index} className="block">
+          <div>
+            {/*index + 1*/}
+            {todo}
+            <button
+              className="btn btn-info sidebtn"
+              onClick={e => props.handleDeleteTodo(todo)}
+            >
+              {" "}
+              ♦{" "}
+            </button>
+            <button
+              className="btn btn-info sidebtn"
+              onClick={e => props.handleDeleteTodo(todo)}
+            >
+              {" "}
+              -{" "}
+            </button>
+          </div>
         </div>
       ))}
     </div>
