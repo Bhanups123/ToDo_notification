@@ -3,14 +3,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const User = require("../models/User");
+const Data = require("../models/Data");
 const Keys = require("../config/keys");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Data = mongoose.model("Data");
 
 router.post("/todo/register", (req, res) => {
   const { name, email, password } = req.body;
-  console.log(email);
 
   User.findOne({ email }).then(user => {
     if (user) {
@@ -27,16 +26,17 @@ router.post("/todo/register", (req, res) => {
       const newData = Data({
         todos: []
       });
+      newData.save();
 
       bcrypt.genSalt((err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser.todos = newData._id;
+          newUser.todos = newData.id;
 
           newUser
             .save()
-            .then(user => res.json(user))
+            .then(user => res.json({ success: "true" }))
             .catch(err => res.json(err));
         });
       });

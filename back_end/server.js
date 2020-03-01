@@ -10,7 +10,6 @@ mongoose.connect("mongodb://localhost/todo_app", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
