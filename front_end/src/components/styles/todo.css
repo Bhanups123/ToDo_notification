@@ -1,0 +1,48 @@
+.block {
+  background-color: rgba(18, 17, 37, 0.6);
+  width: 30%;
+  margin: 4px auto;
+  font-family: Raleway;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 3%;
+  padding: 5px;
+  height: 50px;
+  color: aliceblue;
+}
+
+/* body {
+   background: url(https://cdn.hipwallpaper.com/i/60/22/LeAXGm.jpg); 
+} */
+
+.todo_back {
+  /* //background: url(https://cdn.hipwallpaper.com/i/60/22/LeAXGm.jpg); */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* .my-nav > li:hover {
+  color: aliceblue;
+} */
+.sidebtn {
+  float: right;
+}
+
+.todolist {
+  margin: 50px auto;
+}
+
+.input {
+  margin: 20px;
+  height: 40px;
+  width: 35%;
+}

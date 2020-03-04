@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/todo.css";
+import "./styles/todo.css";
 
 const GetTodo = props => (
   <div>

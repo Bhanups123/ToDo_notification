@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import authHeader from "../../utils/authheader";
+import jwt_decode from "jwt-decode";
+import setCurrentUser from "../../authActions";
 
 class Login extends Component {
   state = {
@@ -14,13 +17,14 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-
     axios
       .post("/todo/login", user)
       .then(res => {
         const { token } = res.data;
         localStorage.setItem("jwtToken", token);
         authHeader(token);
+        const decoded = jwt_decode(token);
+        this.props.setCurrentUser(decoded);
         this.props.history.push("/todo");
       })
       .catch();
@@ -64,5 +68,7 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
+const mapStateToProps = state => ({
+  auth: state.authReducer
+});
+export default connect(mapStateToProps, { setCurrentUser })(Login);

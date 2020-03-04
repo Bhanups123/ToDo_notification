@@ -47,6 +47,10 @@ class ToDo extends Component {
   render() {
     return (
       <div>
+        <img
+          src="https://cdn.hipwallpaper.com/i/60/22/LeAXGm.jpg"
+          className="todo_back"
+        ></img>
         <AddTodo handleAddTodo={this.handleAddTodo} />
         <GetTodo
           todos={this.state.todos}
