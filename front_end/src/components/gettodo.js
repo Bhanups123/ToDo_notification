@@ -7,8 +7,16 @@ const GetTodo = props => (
       <button
         className="btn btn-danger btn-lg"
         onClick={props.handleDeleteTodos}
+        disabled={props.todos.length === 0}
       >
         Remove All
+      </button>
+      <button
+        className="btn btn-success btn-lg"
+        onClick={props.handleSaveTodos}
+        disabled={!props.change}
+      >
+        Save
       </button>
     </div>
 

@@ -8,8 +8,6 @@ class AddTodo extends Component {
     e.preventDefault();
 
     const inputToDo = e.target.elements.todo.value.trim();
-    console.log(inputToDo);
-
     e.target.elements.todo.value = "";
 
     const error = this.props.handleAddTodo(inputToDo);
@@ -26,7 +24,7 @@ class AddTodo extends Component {
             name="todo"
             placeholder="add a todo"
           />
-          <button className="btn btn-success btn-lg">+</button>
+          <button className="btn btn-primary btn-lg">Add</button>
         </form>
         {/*this.state.error && <p>{this.state.error}</p>*/}
       </div>
