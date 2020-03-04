@@ -38,6 +38,10 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
+        <img
+          src="https://static.raymondcamden.com/images/banners/todo.jpg"
+          className="todo_back"
+        ></img>
         <h1>Login </h1>
         <form onSubmit={this.handleOnSubmit}>
           {/* does form a post request */}

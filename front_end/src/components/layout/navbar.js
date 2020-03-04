@@ -35,6 +35,18 @@ class Navbar_c extends Component {
         </li>
       </ul>
     );
+
+    const dashLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li>
+          <Link to="/todo">Dashboard</Link>
+        </li>
+        <li className="nav color_p">
+          Signed In as <p>{this.props.auth.user.name}</p>
+        </li>
+      </ul>
+    );
+
     return (
       <div>
         <nav className="navbar navbar-inverse">
@@ -43,9 +55,8 @@ class Navbar_c extends Component {
               <Link to="/" className="navbar-brand">
                 TODO
               </Link>
-              {console.log("efkefd", this.props)}
-
               {this.props.auth.isAuthenticated ? authLinks : guestLinks}
+              {this.props.auth.isAuthenticated ? dashLinks : undefined}
             </div>
           </div>
         </nav>

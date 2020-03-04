@@ -31,6 +31,10 @@ class Register extends Component {
   render() {
     return (
       <div className="container">
+        <img
+          src="https://static.raymondcamden.com/images/banners/todo.jpg"
+          className="todo_back"
+        ></img>
         <h1>SignUp </h1>
         <form onSubmit={this.handleOnSubmit}>
           <div className="form-group">
