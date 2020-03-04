@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import authHeader from "../../utils/authheader";
 import jwt_decode from "jwt-decode";
-import setCurrentUser from "../../authActions";
+import { setCurrentUser } from "../../authActions";
 
 class Login extends Component {
   state = {

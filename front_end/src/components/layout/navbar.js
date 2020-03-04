@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import setCurrentUser from "../../authActions";
-import logout from "../../utils/logout";
+import { logoutUser } from "../../authActions";
 
 class Navbar_c extends Component {
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+    this.props.history.push("/"); //why not working without using withRouter.
+  }
   render() {
     const guestLinks = (
       <div>
@@ -24,7 +28,11 @@ class Navbar_c extends Component {
       <div>
         <ul className="nav navbar-nav navbar-right">
           <li>
-            <a href="#" onClick={logout} className="nav-link">
+            <a
+              href="#"
+              onClick={this.onLogoutClick.bind(this)}
+              className="nav-link"
+            >
               Logout
             </a>
           </li>
@@ -41,7 +49,7 @@ class Navbar_c extends Component {
               </Link>
               {console.log("efkefd", this.props)}
 
-              {this.props.isAuthenticated ? authLinks : guestLinks}
+              {this.props.isAuthenticated ? guestLinks : authLinks}
             </div>
           </div>
         </nav>
@@ -53,4 +61,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { setCurrentUser })(Navbar_c);
+export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar_c));

@@ -16,6 +16,12 @@ const authReducer = (state = initState, action) => {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
+    case "LOGOUT_USER":
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
     default:
       return state;
   }
