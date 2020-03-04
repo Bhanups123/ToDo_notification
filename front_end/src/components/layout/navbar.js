@@ -11,33 +11,29 @@ class Navbar_c extends Component {
   }
   render() {
     const guestLinks = (
-      <div>
-        <ul className="nav navbar-nav navbar-right">
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
-      </div>
+      <ul className="nav navbar-nav navbar-right">
+        <li className="nav-item">
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+      </ul>
     );
     // className="nav-item"
 
     const authLinks = (
-      <div>
-        <ul className="nav navbar-nav navbar-right">
-          <li>
-            <a
-              href="#"
-              onClick={this.onLogoutClick.bind(this)}
-              className="nav-link"
-            >
-              Logout
-            </a>
-          </li>
-        </ul>
-      </div>
+      <ul className="nav navbar-nav navbar-right">
+        <li>
+          <a
+            href="#"
+            onClick={this.onLogoutClick.bind(this)}
+            className="nav-link"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
     );
     return (
       <div>
@@ -49,7 +45,7 @@ class Navbar_c extends Component {
               </Link>
               {console.log("efkefd", this.props)}
 
-              {this.props.isAuthenticated ? guestLinks : authLinks}
+              {this.props.auth.isAuthenticated ? authLinks : guestLinks}
             </div>
           </div>
         </nav>
