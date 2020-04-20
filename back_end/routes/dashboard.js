@@ -5,6 +5,10 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const Data = mongoose.model("Data");
+const mailjet = require("node-mailjet").connect(
+  "bfee651185b50ceb1b055390b5beca13",
+  "d7fead11096aa3779a83a33a8e31bbb8"
+);
 
 // router.get(
 //   "/todo/Dashboard",
@@ -75,10 +79,39 @@ router.post(
         Data.findById(user.todos._id).then(data => {
           // data.todos.splice(0, data.todos.length, req.body.todos);
           data.todos = req.body.todos;
+          console.log("SDvxc", req.user);
           data
             .save()
             .then()
             .catch();
+          const request = mailjet.post("send", { version: "v3.1" }).request({
+            Messages: [
+              {
+                From: {
+                  Email: "sbhanupratap161@gmail.com",
+                  Name: "Bhanu"
+                },
+                To: [
+                  {
+                    Email: req.user.email,
+                    Name: req.user.name
+                  }
+                ],
+                Subject: "Reminder from ToDo...",
+                TextPart: "Xvxcvcxvxc",
+                HTMLPart:
+                  "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!",
+                CustomID: "AppGettingStartedTest"
+              }
+            ]
+          });
+          request
+            .then(result => {
+              console.log(result.body);
+            })
+            .catch(err => {
+              console.log("fdgdgd", err);
+            });
         });
       } else {
         errors.UserNotFound = "user not found";

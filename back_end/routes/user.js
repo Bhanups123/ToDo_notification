@@ -8,6 +8,9 @@ const Keys = require("../config/keys");
 const router = express.Router();
 const mongoose = require("mongoose");
 
+// const validateRegisterInput = require("../validation/register");
+// const validateLoginInput = require("../validation/login");
+
 router.post("/todo/register", (req, res) => {
   const { name, email, password } = req.body;
 
